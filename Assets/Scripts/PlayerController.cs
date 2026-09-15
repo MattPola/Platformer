@@ -10,10 +10,21 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
     private float moveInput;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
         rb = GetComponent <Rigidbody2D> ();
+    }
+
+    void Update()
+    {
+        animator.SetFloat("IsWalking", Mathf.Abs(moveInput));
+        if (moveInput > 0.1f)
+            transform.localScale = new Vector2(1, 1);
+        else if (moveInput < -0.1f)
+            transform.localScale = new Vector2(-1, 1);
+
     }
 
     private void FixedUpdate()
